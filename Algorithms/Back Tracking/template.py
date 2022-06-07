@@ -53,3 +53,27 @@ def backtrack(candidate):
 
           #### End backtracking
         return backtrack(0, set(), set(), set())
+    
+    
+    
+    
+    ##############################################################################################################
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+    res= []
+    candidates.sort()
+    
+    def backtrack(i, tempSum, tempList, res):
+        if tempSum > target:
+            return
+        if tempSum == target:
+            res.append(tempList[:])
+            return
+        for j in range(i, len(candidates)):
+            if j > i and candidates[j] == candidates[j-1]: continue
+            tempList.append(candidates[j])
+            backtrack(j+1, tempSum+candidates[j], tempList, res)
+            tempList.pop()
+            
+    backtrack(0, 0, [], res)
+    return res
+    ##############################################################################################################
