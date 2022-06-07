@@ -4,7 +4,9 @@
 def minCostConnectPoints(self, points: List[List[int]]) -> int:
      N = len(points)
      adj = { i:[] for i in range(N) } # i : list of [cost, node]
-     for i in range(N):
+     
+     #for every pair of points, calcualte the distance between them (i.e. cost from a->b or vice-versa)
+     for i in range(N): 
          x1, y1 = points[i]
          for j in range(i + 1, N):
              x2, y2 = points[j]
@@ -15,10 +17,11 @@ def minCostConnectPoints(self, points: List[List[int]]) -> int:
      # Prim's
      res = 0
      visit = set()
-     minH = [[0, 0]] # [cost, point]
+     minH = [[0, 0]] # [cost, point] (choose any point to start with. Distance to incldue a source point is 0. 
+     #We are choosing vertice 0 here but could choose any of the n points)
      while len(visit) < N:
          cost, i = heapq.heappop(minH)
-         if i in visit:
+         if i in visit: # if you would be adding an edge you've added to the MST already, skip
              continue
          res += cost
          visit.add(i)
