@@ -26,6 +26,34 @@ def lazyDijkstra(G, s):
                 heappush(PQ, (dist[u]+l, v))
     return dist
     
-   
+  
+
+#Example of Dijkstra with a slight twist:
+
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+        
+        adj = collections.defaultdict(list) # {s: (d, w)}
+        for s, d, w in flights: # O(|E|)
+            adj[s].append((d,w))
+            
+        q = [(0, 0, src)]
+        distances = [float("inf") for _ in range(n)]
+        bestVisited = defaultdict(lambda : math.inf)
+        
+        while q:
+            cost, numStops, node = heapq.heappop(q)
+            if numStops >= bestVisited[node]: continue
+            
+            bestVisited[node] = numStops
+            
+            if node == dst:
+                return cost
+            if numStops == k+1:
+                continue
+            
+            for nei, Wi in adj[node]:
+                heapq.heappush(q, (cost + Wi, numStops+1, nei))
+            
+        return -1
 # Floyd-Warshall
 # Bellman Ford
