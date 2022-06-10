@@ -9,10 +9,13 @@ input:
 output:
     d[i][j] contains the total cost along the shortest path from i to j.
     p[i][j] contains the predecessor of j on the shortest path from i to j.
-for (k=0;k<n;k++)
-  for (i=0;i<n;i++)
-    for (j=0;j<n;j++)
-      if (d[i][k] + d[k][j] < d[i][j]) {
-        d[i][j] = d[i][k]+d[k][j];
-        p[i][j] = p[k][j];
-      }
+    
+    
+// for (k=0;k<n;k++)
+//   for (i=0;i<n;i++)
+//     for (j=0;j<n;j++)
+//       if (d[i][k] + d[k][j] < d[i][j]) {
+//         d[i][j] = d[i][k]+d[k][j];
+//         p[i][j] = p[k][j];
+//       }
+// 
