@@ -55,17 +55,23 @@ def lazyDijkstra(G, s):
         return -1
 # Floyd-Warshall
 
-    def networkDelayTime(self, times: List[List[int]], N: int, K: int) -> int:
-        dist = [[float("inf") for _ in range(N)] for _ in range(N)]
-        for u, v, w in times:
-            dist[u-1][v-1] = w
-        for i in range(N):
-            dist[i][i] = 0
+    def networkDelayTime(self, times, N, K):
+		# Initial Matrix Setup
+        matrix = [[float('inf') for _ in range(N)] for _ in range(N)]
+    
+        for node1, node2, weight in times:
+            matrix[node1-1][node2-1] = weight
+        
+        for i in range(len(matrix)):
+            matrix[i][i] = 0 
+         
+		# Actual Iteration and Finding of Shortest Path
         for k in range(N):
-            for i in range(N):
-                for j in range(N):
-                    dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j])
-        return max(dist[K-1]) if max(dist[K-1]) < float("inf") else -1
+            for node1 in range(N):
+                for node2 in range(N):
+                    matrix[node1][node2] = min(matrix[node1][node2], matrix[node1][k] + matrix[k][node2])
+        
+		return max(matrix[K-1]) if max(matrix[K-1]) != float('inf') else -1
 
 # Bellman Ford
     def networkDelayTime(self, times: List[List[int]], N: int, K: int) -> int:
