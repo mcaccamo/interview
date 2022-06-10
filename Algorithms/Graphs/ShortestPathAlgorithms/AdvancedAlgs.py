@@ -25,8 +25,6 @@ def lazyDijkstra(G, s):
                 dist[v] = dist[u]+l
                 heappush(PQ, (dist[u]+l, v))
     return dist
-    
-  
 
 #Example of Dijkstra with a slight twist:
 
@@ -56,4 +54,40 @@ def lazyDijkstra(G, s):
             
         return -1
 # Floyd-Warshall
+
+    def networkDelayTime(self, times: List[List[int]], N: int, K: int) -> int:
+        dist = [[float("inf") for _ in range(N)] for _ in range(N)]
+        for u, v, w in times:
+            dist[u-1][v-1] = w
+        for i in range(N):
+            dist[i][i] = 0
+        for k in range(N):
+            for i in range(N):
+                for j in range(N):
+                    dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j])
+        return max(dist[K-1]) if max(dist[K-1]) < float("inf") else -1
+
 # Bellman Ford
+    def networkDelayTime(self, times: List[List[int]], N: int, K: int) -> int:
+        dist = [float("inf") for _ in range(N)]
+        dist[K-1] = 0
+        for _ in range(N-1):
+            for u, v, w in times:
+                if dist[u-1] + w < dist[v-1]:
+                    dist[v-1] = dist[u-1] + w
+        return max(dist) if max(dist) < float("inf") else -1
+
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+        prices = [float("inf")] * n
+        prices[src] = 0
+        
+        for i in range(k + 1):
+            tmpPrices = prices.copy()
+            
+            for s, d, p in flights: # s=source, d=dest, p=price
+                if prices[s] == float("inf"):
+                    continue
+                if prices[s] + p < tmpPrices[d]:
+                    tmpPrices[d] = prices[s] + p
+            prices = tmpPrices
+        return -1 if prices[dst] == float("inf") else prices[dst]
