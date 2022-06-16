@@ -55,28 +55,36 @@ def lazyDijkstra(G, s):
         return -1
 # Floyd-Warshall
 
-    def networkDelayTime(self, times, N, K):
-		# Initial Matrix Setup
-        matrix = [[float('inf') for _ in range(N)] for _ in range(N)]
+        #Floyd-Warshall Template
+        
+        # create 2d matrix of distances, this will represent dist[i][j] is the shortest path length between i and j
+        # initially all of these path lengths between vertices are set to infinity / a sentinel value indicating shortest path hasnt been found
+        
+        # all the edges from [i][i] are set to 0 ( no distances from node to iteslf)
+        # all edges inlcuded in the parameters are now set to the values that they hold
+        
+        # next, perform actual meat of Floyd Warshall
+        # for every middle vertex k:
+            # for every soure vertex i
+              # for every source vertex j
+                    # if ( i->k + k->j  ) < i->j:
+                        # set i->j = ( i->k + k->j  )
+        # find MAX of the minimum distances from K
+        
+        matrix = [[float('inf') for _ in range(n)] for _ in range(n)]
     
         for node1, node2, weight in times:
             matrix[node1-1][node2-1] = weight
         
         for i in range(len(matrix)):
             matrix[i][i] = 0 
-         
-		# Actual Iteration and Finding of Shortest Path
-        for k in range(N):
-            for node1 in range(N):
-                for node2 in range(N):
+        
+        for k in range(n):
+            for node1 in range(n):
+                for node2 in range(n):
                     matrix[node1][node2] = min(matrix[node1][node2], matrix[node1][k] + matrix[k][node2])
         
-		return max(matrix[K-1]) if max(matrix[K-1]) != float('inf') else -1
-
-	
-	
-	
-	
+        return max(matrix[K-1]) if max(matrix[K-1]) != float('inf') else -1
 	
 	
 	def findTheCity(self, n: int, edges: List[List[int]], distanceThreshold: int) -> int:
