@@ -115,12 +115,13 @@ def lazyDijkstra(G, s):
 	
 # Bellman Ford
     def networkDelayTime(self, times: List[List[int]], N: int, K: int) -> int:
-        dist = [float("inf") for _ in range(N)]
-        dist[K-1] = 0
-        for _ in range(N-1):
+        dist = [float("inf") for _ in range(N+1)]
+        dist[0] = 0
+        dist[K] = 0
+        for _ in range(N):
             for u, v, w in times:
-                if dist[u-1] + w < dist[v-1]:
-                    dist[v-1] = dist[u-1] + w
+                if dist[u] + w < dist[v]:
+                    dist[v] = dist[u] + w
         return max(dist) if max(dist) < float("inf") else -1
 
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
