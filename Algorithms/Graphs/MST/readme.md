@@ -9,6 +9,8 @@ To do that, we need just 3 steps:
 
 Basically Kruskal's algorithm is union find plus some modifications, in this problem, we can skip actually implementing the union function, and do the union in the for loop where we pick points to connect.
 
+
+
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
         def find(x):
