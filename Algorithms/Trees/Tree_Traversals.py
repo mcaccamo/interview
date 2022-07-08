@@ -55,4 +55,4 @@ def postorderTraversal(self, root: TreeNode) -> List[int]:
         else:
             prev = node
             node = peek.right
-    return 
+    return res
