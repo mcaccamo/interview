@@ -2,25 +2,19 @@
 #Pre Order
 
 #Iterative
-def postorderTraversal(self, root: TreeNode) -> List[int]:
+def preorderTraversal(self, root: TreeNode) -> List[int]:
     if not root:
         return []
-    s = []
-    node = root
-    res = []
-    prev=  None
-    while s or node:
-        while node:
-            s.append(node)
-            node = node.left
-        peek = s[-1]
-        if peek.right == None or peek.right == prev:
-            res.append(s.pop().val)
-            prev = peek
-        else:
-            prev = node
-            node = peek.right
-    return res
+    s = [root]
+    out = []
+    while s:
+        curr= s.pop()
+        out.append(curr.val)
+        if curr.right:
+            s.append(curr.right)
+        if curr.left:
+            s.append(curr.left)
+    return out
 
  
 #In Order
