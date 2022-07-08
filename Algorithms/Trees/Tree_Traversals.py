@@ -53,6 +53,6 @@ def postorderTraversal(self, root: TreeNode) -> List[int]:
             res.append(s.pop().val)
             prev = peek
         else:
-            prev = node
+            prev = None
             node = peek.right
     return res
