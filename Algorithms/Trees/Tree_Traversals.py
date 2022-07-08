@@ -19,7 +19,7 @@ def preorderTraversal(self, root: TreeNode) -> List[int]:
  
 #In Order
 
-#Iterative
+#Iterative  
 def inorderTraversal(self, root: TreeNode) -> List[int]:
     s = []
     curr= root
@@ -49,7 +49,7 @@ def postorderTraversal(self, root: TreeNode) -> List[int]:
             s.append(node)
             node = node.left
         peek = s[-1]
-        if peek.right == None or peek.right == prev:
+        if peek.right == None or prev == peek.right:
             res.append(s.pop().val)
             prev = peek
         else:
