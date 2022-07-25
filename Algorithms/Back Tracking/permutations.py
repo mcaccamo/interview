@@ -17,7 +17,7 @@ class Solution:
 
         
 class Solution:
-    def permute2(self, nums: List[int]) -> List[List[int]]:
+    def permuteDiffWay(self, nums: List[int]) -> List[List[int]]:
         def backtrack(nums, seen, out, curr):
             if len(curr) == len(nums):
                 out.append(curr[:])
