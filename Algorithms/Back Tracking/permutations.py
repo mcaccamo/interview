@@ -14,3 +14,23 @@ class Solution:
         return out
         
 
+
+        
+class Solution:
+    def permute2(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(nums, seen, out, curr):
+            if len(curr) == len(nums):
+                out.append(curr[:])
+            for i, num in enumerate(nums):
+                if i not in seen:
+                    seen.add(i)
+                    curr.append(num)
+                    backtrack(nums, seen, out, curr)
+                    curr.pop()
+                    seen.remove(i)
+        seen = set()
+        out = []
+        backtrack(nums, seen, out, [])
+        return out
+        
+
